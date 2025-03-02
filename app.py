@@ -1,7 +1,7 @@
-import pathlib
+# import pathlib
 
-temp = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
+# temp = pathlib.PosixPath
+# pathlib.PosixPath = pathlib.WindowsPath
 
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
@@ -22,7 +22,8 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 # Load the trained FastAI model
-learn = load_learner(r'.\model.pkl')  # Use raw string for Windows paths
+# learn = load_learner(r'.\model.pkl')  # Use raw string for Windows paths
+learn = load_learner("./model.pkl")  # Works on both Windows & Linux
 
 @app.post("/predict/")
 async def predict_image(request: dict):
