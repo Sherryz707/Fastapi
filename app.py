@@ -23,7 +23,9 @@ app.add_middleware(
 )
 # Load the trained FastAI model
 # learn = load_learner(r'.\model.pkl')  # Use raw string for Windows paths
-learn = load_learner("./model.pkl")  # Works on both Windows & Linux
+# learn = load_learner("./model.pkl")  # Works on both Windows & Linux
+learn = load_learner("./model_fixed.pkl")  # Load the fixed model
+
 
 @app.post("/predict/")
 async def predict_image(request: dict):
