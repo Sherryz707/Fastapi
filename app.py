@@ -1,7 +1,11 @@
-# import pathlib
-
+import pathlib
+import platform
 # temp = pathlib.PosixPath
 # pathlib.PosixPath = pathlib.WindowsPath
+
+# Detect OS
+if platform.system() != "Windows":
+    pathlib.WindowsPath = pathlib.PosixPath  # Trick FastAI into using Linux paths
 
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
@@ -23,8 +27,8 @@ app.add_middleware(
 )
 # Load the trained FastAI model
 # learn = load_learner(r'.\model.pkl')  # Use raw string for Windows paths
-# learn = load_learner("./model.pkl")  # Works on both Windows & Linux
-learn = load_learner("./model_fixed.pkl")  # Load the fixed model
+learn = load_learner("./model.pkl")  # Works on both Windows & Linux
+# learn = load_learner("./model_fixed.pkl")  # Load the fixed model
 
 
 @app.post("/predict/")
